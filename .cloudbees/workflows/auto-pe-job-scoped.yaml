@@ -44,5 +44,15 @@ jobs:
     with:
       input-data: ${{ needs.scan-and-evaluate.outputs.policy-subject }}
       checkpoint-type: job
+      checkpoint-name: publish
       checkpoint-position: within
+
+  publish:
+    needs: 
+      - policy-evaluation-job
+    steps:
+      - name: Publish something
+        uses: docker://alpine:latest
+        shell: sh
+        run: echo "Publishing..."
 
